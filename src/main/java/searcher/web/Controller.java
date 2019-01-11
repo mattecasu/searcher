@@ -17,6 +17,8 @@ import model.Product;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,7 +61,16 @@ public class Controller {
   public ResponseEntity<List<Product>> query(@RequestParam String queryString,
       @RequestParam(defaultValue = "10") int limit) {
     try {
-      return new ResponseEntity<>(luceneRepository.searchProducts(queryString, limit), OK);
+      List<Product> products = luceneRepository.searchProducts(queryString, limit);
+      if (products.isEmpty()) {
+        String didYouMean = luceneRepository.didYouMean(queryString).orElse("");
+        MultiValueMap<String, String> headers = new LinkedMultiValueMap();
+        headers.put("x-did-you-mean", asList(didYouMean));
+        return new ResponseEntity<>(products, headers, OK);
+      } else {
+        return new ResponseEntity<>(products, OK);
+      }
+
     } catch (ParseException e) {
       log.error(e.getMessage());
       return new ResponseEntity<>(newArrayList(), BAD_REQUEST);

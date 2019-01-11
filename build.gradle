@@ -42,7 +42,7 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:1.18.4"
     compile group: 'org.apache.lucene', name: 'lucene-queryparser', version: luceneVersion
     compile group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: luceneVersion
-    //compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
+    compile group: 'org.apache.lucene', name: 'lucene-suggest', version: luceneVersion
 
 }
 
