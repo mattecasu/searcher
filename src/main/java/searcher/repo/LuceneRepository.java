@@ -38,6 +38,11 @@ public class LuceneRepository {
   private final FSDirectory dir;
   SpellChecker spellchecker;
 
+  public static final String titleFieldName = "title";
+  public static final String descriptionFieldName = "description";
+  public static final String merchantFieldName = "merchant";
+  public static final String catchAllFieldName = "catch_all";
+
   public LuceneRepository(Analyzer analyzer) throws IOException {
     this.analyzer = analyzer;
     dir = FSDirectory.open(Files.createTempDirectory(null));
@@ -54,17 +59,20 @@ public class LuceneRepository {
       indexWriterConfig.setOpenMode(OpenMode.CREATE);
       IndexWriter writer = new IndexWriter(dir, indexWriterConfig);
 
+      log.info("Starting indexing..");
+
       products.parallelStream()
           .forEach(doc -> {
             Document document = new Document();
 
-            document.add(new TextField("title", doc.getTitle(), Field.Store.YES));
-            document.add(new TextField("description", doc.getDescription(), Field.Store.YES));
-            document.add(new TextField("merchant", doc.getMerchant(), Field.Store.YES));
+            document.add(new TextField(titleFieldName, doc.getTitle(), Field.Store.YES));
+            document
+                .add(new TextField(descriptionFieldName, doc.getDescription(), Field.Store.YES));
+            document.add(new TextField(merchantFieldName, doc.getMerchant(), Field.Store.YES));
 
-            document.add(new TextField("catch_all", doc.getTitle(), Field.Store.NO));
-            document.add(new TextField("catch_all", doc.getDescription(), Field.Store.NO));
-            document.add(new TextField("catch_all", doc.getMerchant(), Field.Store.NO));
+            document.add(new TextField(catchAllFieldName, doc.getTitle(), Field.Store.NO));
+            document.add(new TextField(catchAllFieldName, doc.getDescription(), Field.Store.NO));
+            document.add(new TextField(catchAllFieldName, doc.getMerchant(), Field.Store.NO));
 
             try {
               writer.addDocument(document);
@@ -74,15 +82,19 @@ public class LuceneRepository {
 
           });
 
+      log.info("Indexed " + writer.numDocs() + " documents.");
       writer.close();
 
+      log.info("Spellchecker initialisation..");
+
       DirectoryReader reader = DirectoryReader.open(dir);
-      LuceneDictionary spellCheckerDictionary = new LuceneDictionary(reader, "catch_all");
+      LuceneDictionary spellCheckerDictionary = new LuceneDictionary(reader, catchAllFieldName);
       spellchecker
           .indexDictionary(spellCheckerDictionary, new IndexWriterConfig(new StandardAnalyzer()),
               true);
       reader.close();
       lock.close();
+      log.info("Indexing phase done.");
     } catch (IOException e) {
       log.error(e.getMessage());
     }
@@ -94,7 +106,7 @@ public class LuceneRepository {
     DirectoryReader indexReader = DirectoryReader.open(dir);
     IndexSearcher searcher = new IndexSearcher(indexReader);
 
-    Query query = new QueryParser("catch_all", analyzer)
+    Query query = new QueryParser(catchAllFieldName, analyzer)
         .parse(queryString);
     TopDocs topDocs = searcher.search(query, limit);
     List<Document> documents = newArrayList();
@@ -114,9 +126,9 @@ public class LuceneRepository {
 
   private Product getProductFromDocument(Document doc) {
     return new Product()
-        .setTitle(doc.get("title"))
-        .setDescription(doc.get("description"))
-        .setMerchant(doc.get("merchant"));
+        .setTitle(doc.get(titleFieldName))
+        .setDescription(doc.get(descriptionFieldName))
+        .setMerchant(doc.get(merchantFieldName));
   }
 
 }

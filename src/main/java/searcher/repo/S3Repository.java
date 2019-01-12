@@ -11,7 +11,9 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.zip.GZIPInputStream;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class S3Repository {
 
   private final AmazonS3 s3Client;
@@ -22,11 +24,14 @@ public class S3Repository {
 
   public String getFileContent(String fileUrl) throws IOException, URISyntaxException {
     AmazonS3URI s3URI = new AmazonS3URI(new URI(fileUrl));
+    log.info("Downloading file " + fileUrl + " ..");
     S3Object s3Object = s3Client.getObject(s3URI.getBucket(), s3URI.getKey());
-    return new BufferedReader(new InputStreamReader(
-        new GZIPInputStream(s3Object.getObjectContent())))
+    log.info("File downloaded");
+    String fileContent = new BufferedReader(
+        new InputStreamReader(new GZIPInputStream(s3Object.getObjectContent())))
         .lines()
         .collect(joining());
+    return fileContent;
   }
 
 }

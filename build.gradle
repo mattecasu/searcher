@@ -1,5 +1,4 @@
 buildscript {
-
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
@@ -11,7 +10,6 @@ plugins {
 }
 
 apply plugin: 'java'
-//apply plugin: 'maven'
 apply plugin: 'org.springframework.boot'
 
 sourceCompatibility = 1.8
@@ -24,28 +22,30 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: junitVersion
-    testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}"
     compile "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
-    compile "org.apache.commons:commons-lang3:$commonsLang3Version"
+
     compile "io.springfox:springfox-swagger2:${springfoxVersion}"
     compile "io.springfox:springfox-spring-webflux:${springfoxVersion}"
     compile "io.springfox:springfox-swagger-ui:${springfoxVersion}"
+    
     compile group: "ch.qos.logback", name: "logback-classic", version: logbackVersion
     compile group: "net.logstash.logback", name: "logstash-logback-encoder", version: logstashLogbackEncoderVersion
+
     compile group: 'org.apache.lucene', name: 'lucene-core', version: luceneVersion
     compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: awsVersion
+
     compile group: 'com.google.guava', name: 'guava', version: '27.0.1-jre'
-    compile 'org.projectlombok:lombok:1.18.4'
-    annotationProcessor "org.projectlombok:lombok:1.18.4"
+    compile "org.apache.commons:commons-lang3:$commonsLang3Version"
+    testCompile group: 'junit', name: 'junit', version: junitVersion
+    
+    compile group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
+    
     compile group: 'org.apache.lucene', name: 'lucene-queryparser', version: luceneVersion
     compile group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: luceneVersion
     compile group: 'org.apache.lucene', name: 'lucene-suggest', version: luceneVersion
 
-}
-
-springBoot {
-    buildInfo()
 }
