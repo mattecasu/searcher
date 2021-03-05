@@ -2,7 +2,7 @@
 
 To run the service: `./gradlew bootRun`
 
-Visit `http://localhost:8080/swagger-ui.html` for the service documentation.
+Visit `http://localhost:8080/swagger-ui` for the service documentation.
 There are two endpoints:
 - `/index`, to index a (compliant) file from S3
 [**note**: pay attention not to have
