@@ -15,4 +15,4 @@ Current config:
 - "merchant", StandardAnalyzer
 - "catch_all" field (default) with the default (Standard) analyzer
 
-When the result is empty, the header `x-did-you-mean` will contain a possible suggestion.
+When the result is empty, the header `X-did-you-mean` will contain a possible suggestion.

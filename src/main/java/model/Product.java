@@ -9,17 +9,17 @@ import lombok.experimental.Accessors;
 @EqualsAndHashCode
 public class Product {
 
-  public Product() {
-  }
+    public Product() {
+    }
 
-  @Getter
-  @Setter
-  private String title;
-  @Getter
-  @Setter
-  private String description;
-  @Getter
-  @Setter
-  private String merchant;
+    @Getter
+    @Setter
+    private String title;
+    @Getter
+    @Setter
+    private String description;
+    @Getter
+    @Setter
+    private String merchant;
 
 }
