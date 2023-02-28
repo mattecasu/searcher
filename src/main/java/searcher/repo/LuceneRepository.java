@@ -112,11 +112,11 @@ public class LuceneRepository {
     TopDocs topDocs = searcher.search(query, limit);
     List<Document> documents = newArrayList();
     for (ScoreDoc scoreDoc : topDocs.scoreDocs) {
-      documents.add(searcher.doc(scoreDoc.doc));
+      documents.add(searcher.storedFields().document(scoreDoc.doc));
     }
     indexReader.close();
     return documents.stream()
-        .map(doc -> getProductFromDocument(doc))
+        .map(this::getProductFromDocument)
         .collect(toList());
   }
 
