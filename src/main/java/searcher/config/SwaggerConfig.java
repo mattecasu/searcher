@@ -15,23 +15,23 @@ import static springfox.documentation.spi.DocumentationType.SWAGGER_2;
 @Configuration
 public class SwaggerConfig {
 
-    @Bean
-    public Docket api() {
-        return new Docket(SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("searcher"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(
-                        new ApiInfo(
-                                "Searcher Service",
-                                "",
-                                "latest",
-                                EMPTY,
-                                new Contact("Matteo Casu", "", "mattecasu@gmail.com"),
-                                EMPTY,
-                                EMPTY,
-                                newArrayList())
-                );
-    }
+  @Bean
+  public Docket api() {
+    return new Docket(SWAGGER_2)
+        .select()
+        .apis(RequestHandlerSelectors.basePackage("searcher"))
+        .paths(PathSelectors.any())
+        .build()
+        .apiInfo(
+            new ApiInfo(
+                "Searcher Service",
+                "",
+                "latest",
+                EMPTY,
+                new Contact("Matteo Casu", "", "mattecasu@gmail.com"),
+                EMPTY,
+                EMPTY,
+                newArrayList())
+        );
+  }
 }
