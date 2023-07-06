@@ -1,5 +1,14 @@
 package searcher.repo;
 
+import static com.google.common.collect.Lists.newArrayList;
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import model.Product;
 import org.apache.lucene.analysis.Analyzer;
@@ -21,16 +30,6 @@ import org.apache.lucene.search.spell.LuceneDictionary;
 import org.apache.lucene.search.spell.SpellChecker;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.store.Lock;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-
-import static com.google.common.collect.Lists.newArrayList;
-import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 
 @Slf4j
 public class LuceneRepository {
