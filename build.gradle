@@ -17,10 +17,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}"
     implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
 
-    implementation "io.springfox:springfox-boot-starter:${springfoxVersion}"
-
-    implementation group: "ch.qos.logback", name: "logback-classic", version: logbackVersion
-    implementation group: "net.logstash.logback", name: "logstash-logback-encoder", version: logstashLogbackEncoderVersion
+    implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:${springdocVersion}"
 
     implementation group: 'org.apache.lucene', name: 'lucene-core', version: luceneVersion
     implementation group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: awsVersion
@@ -32,7 +29,6 @@ dependencies {
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
 
     implementation group: 'org.apache.lucene', name: 'lucene-queryparser', version: luceneVersion
-    implementation group: 'org.apache.lucene', name: 'lucene-analyzers-common', version: luceneVersion
     implementation group: 'org.apache.lucene', name: 'lucene-suggest', version: luceneVersion
 
     // JUnit 5
