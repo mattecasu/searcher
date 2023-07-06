@@ -1,7 +1,20 @@
 package searcher.web;
 
 
+import static com.google.common.collect.Lists.newArrayList;
+import static java.util.Arrays.asList;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import model.Product;
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -16,17 +29,9 @@ import org.springframework.web.bind.annotation.RestController;
 import searcher.repo.LuceneRepository;
 import searcher.repo.S3Repository;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.List;
-
-import static com.google.common.collect.Lists.newArrayList;
-import static java.util.Arrays.asList;
-import static org.springframework.http.HttpStatus.*;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-
 @Slf4j
 @RestController
+@Tag(name = "Searcher Controller")
 public class Controller {
 
   @Autowired
@@ -40,9 +45,11 @@ public class Controller {
     this.objectMapper = new ObjectMapper();
   }
 
+  @Operation(summary = "Index a file")
   @RequestMapping(value = "/index", method = {POST})
   @ResponseBody
-  public ResponseEntity<String> index(@RequestParam String fileUrl) throws URISyntaxException {
+  public ResponseEntity<String> index(@Parameter(description = "S3 file") @RequestParam String fileUrl)
+      throws URISyntaxException {
 
     try {
       String fileContent = s3Repository.getFileContent(fileUrl);
@@ -55,6 +62,7 @@ public class Controller {
     }
   }
 
+  @Operation(summary = "Query the index")
   @RequestMapping(value = "/query", method = {POST})
   @ResponseBody
   public ResponseEntity<List<Product>> query(@RequestParam String queryString,

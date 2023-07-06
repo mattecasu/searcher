@@ -1,1 +1,10 @@
 s3.region: eu-west-1
+
+springdoc:
+#  packagesToScan: searcher
+#  pathsToMatch: /**
+  swagger-ui:
+    path: /swagger-ui.html
+    configUrl: /v3/api-docs/swagger-config
+    url: /v3/api-docs
+    doc-expansion: none
