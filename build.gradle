@@ -22,7 +22,7 @@ def logbackVersion = "1.2.3"
 def logstashLogbackEncoderVersion = "4.11"
 def luceneVersion = "9.7.0"
 def awsVersion = "1.11.968"
-
+def guavaVersion = "32.1.1-jre"
 
 dependencies {
 
@@ -34,7 +34,7 @@ dependencies {
     implementation "org.apache.lucene:lucene-core:${luceneVersion}"
     implementation "com.amazonaws:aws-java-sdk-s3:${awsVersion}"
 
-    implementation "com.google.guava:guava:32.1.1-jre"
+    implementation "com.google.guava:guava:${guavaVersion}"
     implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
 
     implementation "org.apache.lucene:lucene-queryparser:${luceneVersion}"
