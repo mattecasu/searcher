@@ -1,6 +1,7 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version "${springBootVersion}"
+    id 'org.springframework.boot' version "3.1.1"
+    id "io.freefair.lombok" version "8.4"
 }
 
 apply plugin: 'java'
@@ -11,6 +12,18 @@ repositories {
     maven { url "https://repo.spring.io/milestone" }
 }
 
+// only var-assignment method recognised by Dependabot,
+// see https://github.com/dependabot/dependabot-core/issues/1618
+def springdocVersion = "2.1.0"
+def springBootVersion = "3.1.1"
+def jUnitVersion = "5.8.1"
+def commonsLang3Version = "3.12.0"
+def logbackVersion = "1.2.3"
+def logstashLogbackEncoderVersion = "4.11"
+def luceneVersion = "9.7.0"
+def awsVersion = "1.11.968"
+def guavaVersion = "32.1.1-jre"
+
 dependencies {
 
     implementation "org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}"
@@ -18,17 +31,14 @@ dependencies {
 
     implementation "org.springdoc:springdoc-openapi-starter-webflux-ui:${springdocVersion}"
 
-    implementation group: 'org.apache.lucene', name: 'lucene-core', version: luceneVersion
-    implementation group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: awsVersion
+    implementation "org.apache.lucene:lucene-core:${luceneVersion}"
+    implementation "com.amazonaws:aws-java-sdk-s3:${awsVersion}"
 
-    implementation group: 'com.google.guava', name: 'guava', version: '32.1.1-jre'
-    implementation "org.apache.commons:commons-lang3:$commonsLang3Version"
+    implementation "com.google.guava:guava:${guavaVersion}"
+    implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
 
-    implementation group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
-
-    implementation group: 'org.apache.lucene', name: 'lucene-queryparser', version: luceneVersion
-    implementation group: 'org.apache.lucene', name: 'lucene-suggest', version: luceneVersion
+    implementation "org.apache.lucene:lucene-queryparser:${luceneVersion}"
+    implementation "org.apache.lucene:lucene-suggest:${luceneVersion}"
 
     // JUnit 5
     testImplementation "org.junit.jupiter:junit-jupiter:${jUnitVersion}"
