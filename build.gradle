@@ -21,7 +21,7 @@ def commonsLang3Version = "3.14.0"
 def logbackVersion = "1.2.3"
 def logstashLogbackEncoderVersion = "4.11"
 def luceneVersion = "9.11.0"
-def awsVersion = "1.12.691"
+def awsVersion = "1.12.770"
 def guavaVersion = "33.2.1-jre"
 
 dependencies {
