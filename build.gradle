@@ -16,7 +16,7 @@ repositories {
 // see https://github.com/dependabot/dependabot-core/issues/1618
 def springdocVersion = "2.5.0"
 def springBootVersion = "3.3.0"
-def jUnitVersion = "5.10.2"
+def jUnitVersion = "5.11.2"
 def commonsLang3Version = "3.14.0"
 def logbackVersion = "1.2.3"
 def logstashLogbackEncoderVersion = "4.11"
