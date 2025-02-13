@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version "3.3.2"
-    id "io.freefair.lombok" version "8.10.2"
+    id "io.freefair.lombok" version "8.12.1"
 }
 
 apply plugin: 'java'
@@ -17,12 +17,12 @@ repositories {
 def springdocVersion = "2.5.0"
 def springBootVersion = "3.3.2"
 def jUnitVersion = "5.11.3"
-def commonsLang3Version = "3.14.0"
+def commonsLang3Version = "3.17.0"
 def logbackVersion = "1.2.3"
 def logstashLogbackEncoderVersion = "4.11"
 def luceneVersion = "10.0.0"
 def awsVersion = "1.12.779"
-def guavaVersion = "33.2.1-jre"
+def guavaVersion = "33.4.0-jre"
 
 dependencies {
 
