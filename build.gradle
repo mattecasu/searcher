@@ -16,11 +16,11 @@ repositories {
 // see https://github.com/dependabot/dependabot-core/issues/1618
 def springdocVersion = "2.5.0"
 def springBootVersion = "3.4.0"
-def jUnitVersion = "5.11.3"
+def jUnitVersion = "5.11.4"
 def commonsLang3Version = "3.17.0"
 def logbackVersion = "1.2.3"
 def logstashLogbackEncoderVersion = "4.11"
-def luceneVersion = "10.0.0"
+def luceneVersion = "10.1.0"
 def awsVersion = "1.12.779"
 def guavaVersion = "33.4.0-jre"
 
