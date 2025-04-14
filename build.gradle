@@ -22,7 +22,7 @@ def logbackVersion = "1.2.3"
 def logstashLogbackEncoderVersion = "4.11"
 def luceneVersion = "10.1.0"
 def awsVersion = "1.12.782"
-def guavaVersion = "33.4.0-jre"
+def guavaVersion = "33.4.7-jre"
 
 dependencies {
 
